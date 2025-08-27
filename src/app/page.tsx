@@ -1,103 +1,70 @@
-import Image from "next/image";
+'use client'
+import React from 'react'
 
-export default function Home() {
+import Footer from '@/components/layout/Footer'
+import Navbar from '@/components/layout/Navbar'
+import Sidebar from '@/components/layout/Sidebar'
+
+import { useLocalStorage } from '../../hook/useLocalStorage'
+
+const Page = () => {
+  const [sidebarVisible, setSidebarVisible] = useLocalStorage('sidebarVisible', true);
+
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      
+      <main className="pt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex gap-6">
+            {/* Main Content */}
+            <div className={`flex-1 transition-all duration-300 ${
+              sidebarVisible ? 'lg:mr-80' : 'mr-0'
+            }`}>
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <h1 className="text-2xl font-bold text-[#0F172A] mb-4">Welcome to Reddit</h1>
+                <p className="text-gray-600 mb-6">
+                  Discover the best of what Reddit has to offer. From trending topics to niche communities, 
+                  there&apos;s something for everyone.
+                </p>
+                
+                {/* Sample Content */}
+                <div className="space-y-4">
+                  <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+                    <h3 className="font-semibold text-[#0F172A] mb-2">Getting Started</h3>
+                    <p className="text-gray-600 text-sm">
+                      Explore communities, create posts, and engage with other users. The possibilities are endless!
+                    </p>
+                  </div>
+                  
+                  <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+                    <h3 className="font-semibold text-[#0F172A] mb-2">Popular Communities</h3>
+                    <p className="text-gray-600 text-sm">
+                      Check out trending communities in the sidebar to find topics that interest you.
+                    </p>
+                  </div>
+                  
+                  <div className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+                    <h3 className="font-semibold text-[#0F172A] mb-2">Create Content</h3>
+                    <p className="text-gray-600 text-sm">
+                      Share your thoughts, ask questions, or start discussions in your favorite communities.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      <Sidebar isVisible={sidebarVisible} onToggle={toggleSidebar} />
+      <Footer />
     </div>
-  );
+  )
 }
+
+export default Page
